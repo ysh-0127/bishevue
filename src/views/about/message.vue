@@ -120,6 +120,7 @@
 import { validateIdCard, validateAge, validateSalary } from '@/utils/validate'
 import { updateMessage, validPassword, updatePassword } from '@/api/user'
 import { getUserInfo } from '@/api/login'
+import store from '@/store'
 
 const rulesOptions = [
   { key: '1', display_name: '销售' },
@@ -154,7 +155,7 @@ export default {
       if (value === '') {
         callback(new Error('请输入旧密码'))
       } else {
-        validPassword(value).then(response => {
+        validPassword(value, store.getters.token).then(response => {
           if (response.data.code === 20000) {
             callback()
           } else {
@@ -280,9 +281,11 @@ export default {
         if (valid) {
           updatePassword({
             oldPass: this.ruleForm.oldPass,
-            newPass: this.ruleForm.newPass
+            newPass: this.ruleForm.newPass,
+            token: store.getters.token
           }).then(response => {
             if (response.data.code === 20000) {
+              this.dialogPassVisible = false
               this.$notify({
                 title: '成功',
                 message: '修改成功',

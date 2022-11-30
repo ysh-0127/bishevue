@@ -8,11 +8,11 @@ export function updateMessage(message) {
   })
 }
 
-export function validPassword(validPass) {
+export function validPassword(validPass, token) {
   return request({
     url: '/user/validPassword',
     method: 'post',
-    params: { validPass }
+    params: { validPass, token }
   })
 }
 

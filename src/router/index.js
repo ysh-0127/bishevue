@@ -224,7 +224,7 @@ export const asyncRouterMap = [
   {
     path: '/my',
     component: Layout,
-    meta: { roles: ['editor'] },
+    // meta: { roles: ['editor'] },
     children: [
       {
         path: 'message',
@@ -232,8 +232,8 @@ export const asyncRouterMap = [
         component: () => import('@/views/about/message'),
         meta: {
           title: '我的信息',
-          icon: 'myEmp',
-          roles: ['editor']
+          icon: 'myEmp'
+          // roles: ['editor']
         }
       }
     ]
